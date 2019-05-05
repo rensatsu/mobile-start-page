@@ -1,0 +1,238 @@
+$color-pane-bg: #333;
+$color-pane-fg: #fff;
+$color-wallpaper-bg1: #1976D2;
+$color-wallpaper-bg2: #26A69A;
+$color-fg: #fff;
+
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+
+:root {
+    --color-pane-bg: #{$color-pane-bg};
+    --color-pane-fg: #{$color-pane-fg};
+    --color-wallpaper-bg1: #{$color-wallpaper-bg1};
+    --color-wallpaper-bg2: #{$color-wallpaper-bg2};
+    --color-fg: #{$color-fg};
+}
+
+html, body {
+    margin: 0;
+    font-family: system-ui;
+    font-size: 16px;
+}
+
+@mixin maximize {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+@mixin maximize-bottom {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+}
+
+#wallpaper {
+    @include maximize();
+    z-index: -1;
+    background: linear-gradient(to bottom, var(--color-wallpaper-bg1), var(--color-wallpaper-bg2));
+}
+
+main {
+    nav {
+        background: $color-pane-bg;
+        color: $color-pane-fg;
+        padding: 1rem;
+        display: flex;
+        user-select: none;
+
+        h1 {
+            font-size: 1.1rem;
+            padding: 0;
+            margin: 0;
+            flex: 1;
+        }
+
+        .btn {
+            color: inherit;
+            border: 1px solid #ccc;
+            background: none;
+            padding: 3px 5px;
+            margin: 0;
+            border-radius: 3px;
+            cursor: pointer;
+
+            &:hover, &:focus, &:active {
+                background-color: rgba(#fff, .25);
+                outline: 0;
+            }
+        }
+    }
+
+    .entry {
+        $entry-size: 32px;
+
+        display: grid;
+        grid-template-columns: $entry-size 1fr;
+        grid-template-rows: auto;
+        padding: 1rem;
+        color: var(--color-fg);
+        cursor: pointer;
+
+        &:hover, &:focus {
+            background: rgba(#fff, .25);
+        }
+
+        .btn {
+            background: none;
+            border: 0;
+
+            &[disabled] {
+                filter: grayscale(1);
+                opacity: .25;
+            }
+        }
+
+        .btn-action {
+            display: none;
+        }
+
+        img {
+            width: $entry-size;
+            height: $entry-size;
+            display: block;
+        }
+
+        a {
+            display: block;
+            text-decoration: none;
+            color: inherit;
+            height: $entry-size;
+            line-height: $entry-size;
+            padding: 0 0 0 1rem;
+        }
+
+        &.is-editable {
+            grid-template-columns: $entry-size 1fr $entry-size $entry-size $entry-size $entry-size;
+
+            .btn-action {
+                display: block;
+            }
+        }
+    }
+
+    .message-center {
+        @include maximize-bottom();
+
+        & > div {
+            padding: 1rem;
+            background: $color-pane-bg;
+            color: $color-pane-fg;
+            cursor: pointer;
+            border-top: 1px solid mix(#000, $color-pane-fg, 50%);
+        }
+    }
+
+    .menu {
+        @include maximize();
+        background: rgba(#000, .25);
+        user-select: none;
+
+        > ul {
+            @include maximize-bottom();
+
+            background: $color-pane-bg;
+            color: $color-pane-fg;
+
+            margin: 0;
+            padding: 0;
+            max-height: 70%;
+            overflow: auto;
+
+            > li {
+                &:hover {
+                    background: rgba(#fff, .25);
+                }
+
+                a {
+                    padding: 1rem;
+                    display: block;
+                    cursor: pointer;
+                }
+            }
+        }
+    }
+
+    .landing {
+        width: 90%;
+        margin: 1rem auto;
+        text-align: center;
+
+        > img {
+            max-width: 300px;
+        }
+
+        > p {
+            font-size: 1.25rem;
+            color: var(--color-fg);
+        }
+    }
+
+    .dialog-wrapper:not([hidden]) {
+        $dialog-bg: #f9f9f9;
+        $dialog-fg: #394257;
+
+        @include maximize();
+        background: rgba(#000, .25);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        > .dialog {
+            width: 90%;
+            max-width: 450px;
+            background: $dialog-bg;
+            border: 1px solid mix(#000, $dialog-bg, 50%);
+            color: $dialog-fg;
+            border-radius: 5px;
+            padding: 1rem;
+
+            > h2 {
+                margin: 0;
+            }
+
+            > .theme-collection {
+                display: grid;
+                grid-template-columns: 1fr 3fr;
+                grid-auto-rows: 1fr;
+                grid-gap: .5rem;
+
+                > .theme-name {
+                    display: flex;
+                    align-items: center;
+                }
+
+                > .theme-preview {
+                    --color-bg1: #{$color-wallpaper-bg1};
+                    --color-bg2: #{$color-wallpaper-bg2};
+                    --color-fg: #{$color-fg};
+
+                    width: 3rem;
+                    height: 3rem;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    box-shadow: 1px 1px 3px rgba(#000, .5);
+                    border-radius: 5px;
+                    background: linear-gradient(to bottom, var(--color-bg1), var(--color-bg2));
+                    color: var(--color-fg);
+                }
+            }
+        }
+    }
+}

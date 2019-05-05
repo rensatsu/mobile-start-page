@@ -1,0 +1,22 @@
+{
+    "name": "New tab",
+    "short_name": "New tab",
+    "description": "Custom new tab page",
+    "lang": "en-US",
+    "start_url": "./",
+    "display": "standalone",
+    "icons": [
+        {
+            "src": "./assets/images/icon512.png",
+            "sizes": "512x512",
+            "type": "image/png"
+        },
+        {
+            "src": "./assets/images/icon128.png",
+            "sizes": "128x128",
+            "type": "image/png"
+        }
+    ],
+    "theme_color": "#333333",
+    "background_color": "#f0f0f0"
+}
