@@ -201,36 +201,79 @@ main {
             color: $dialog-fg;
             border-radius: 5px;
             padding: 1rem;
+            max-height: 95vh;
+            overflow: auto;
 
             > h2 {
                 margin: 0;
             }
 
             > .theme-collection {
-                display: grid;
-                grid-template-columns: 1fr 3fr;
-                grid-auto-rows: 1fr;
-                grid-gap: .5rem;
+                margin: 1rem 0;
+                padding: 0;
+                list-style-type: none;
 
-                > .theme-name {
-                    display: flex;
-                    align-items: center;
+                li {
+                    &.active {
+                        background: mix($dialog-bg, $dialog-fg, 75%);
+                    }
+
+                    &:hover {
+                        background: mix($dialog-bg, $dialog-fg, 80%);
+                    }
+
+                    &.active:hover {
+                        background: mix($dialog-bg, $dialog-fg, 70%);
+                    }
+
+                    a {
+                        padding: 1rem;
+                        display: flex;
+                        cursor: pointer;
+                        color: inherit;
+                        text-decoration: none;
+
+                        .theme-name {
+                            display: flex;
+                            align-items: center;
+                            margin: 0 0 0 1rem;
+                        }
+
+                        .theme-preview {
+                            --color-bg1: #{$color-wallpaper-bg1};
+                            --color-bg2: #{$color-wallpaper-bg2};
+                            --color-fg: #{$color-fg};
+
+                            width: 2rem;
+                            height: 2rem;
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+                            box-shadow: 1px 1px 3px rgba(#000, .5);
+                            border-radius: 5px;
+                            background: linear-gradient(to bottom, var(--color-bg1), var(--color-bg2));
+                            color: var(--color-fg);
+                        }
+                    }
                 }
+            }
+        }
 
-                > .theme-preview {
-                    --color-bg1: #{$color-wallpaper-bg1};
-                    --color-bg2: #{$color-wallpaper-bg2};
-                    --color-fg: #{$color-fg};
+        footer {
+            display: flex;
+            justify-content: flex-end;
 
-                    width: 3rem;
-                    height: 3rem;
-                    display: flex;
-                    align-items: center;
-                    justify-content: center;
-                    box-shadow: 1px 1px 3px rgba(#000, .5);
-                    border-radius: 5px;
-                    background: linear-gradient(to bottom, var(--color-bg1), var(--color-bg2));
-                    color: var(--color-fg);
+            .dialog-btn {
+                border: 1px solid mix(#fff, $dialog-fg, 20%);
+                background: $dialog-fg;
+                color: $dialog-bg;
+                border-radius: 5px;
+                cursor: pointer;
+                padding: .5rem 2rem;
+
+                &:hover, &:focus, &:active {
+                    background: mix(#fff, $dialog-fg, 30%);
+                    outline: 0;
                 }
             }
         }

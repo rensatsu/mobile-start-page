@@ -428,6 +428,7 @@
         constructor(app, storage) {
             this.app = app;
             this.storage = storage;
+            this.themeName = (app.settings || {}).themeName || null;
 
             this.themesCollection = {
                 default: {
@@ -472,6 +473,14 @@
             };
         }
 
+        show() {
+            this.elements.container.hidden = false;
+        }
+
+        hide() {
+            this.elements.container.hidden = true;
+        }
+
         set(name) {
             if (!name) return;
 
@@ -479,9 +488,11 @@
 
             const config = this.themesCollection[name];
 
+            this.themeName = name;
             this.app.settings.colorBg1 = config.colorBg1 || null;
             this.app.settings.colorBg2 = config.colorBg2 || null;
             this.app.settings.colorFg = config.colorFg || null;
+            this.app.settings.themeName = name;
             this.storage.set('settings', JSON.stringify(this.app.settings));
 
             new Message("Theme saved, restarting...");
@@ -499,13 +510,33 @@
             const inner = document.createElement('div');
             inner.classList.add('dialog');
 
+            elem.addEventListener('click', e => {
+                if (e.target === elem) {
+                    e.preventDefault();
+                    this.hide();
+                }
+            });
+
             const header = document.createElement('h2');
             header.textContent = "Theme";
 
-            const collection = document.createElement('div');
+            const collection = document.createElement('ul');
             collection.classList.add('theme-collection');
 
             Object.entries(this.themesCollection).forEach(([name, theme]) => {
+                const li = document.createElement('li');
+                const a = document.createElement('a');
+                a.href = '#';
+                a.addEventListener('click', ev => {
+                    ev.preventDefault();
+                    this.set(name);
+                    this.hide();
+                });
+
+                if (name === this.themeName) {
+                    li.classList.add('active');
+                }
+
                 const e = document.createElement('div');
                 e.classList.add('theme-preview');
                 e.textContent = 'Aa';
@@ -527,11 +558,33 @@
                 d.textContent = theme.name;
                 d.classList.add('theme-name');
 
-                collection.append(e, d);
+                a.append(e, d);
+                li.append(a);
+                collection.append(li);
             });
 
-            inner.append(header, collection);
+            const footer = document.createElement('footer');
+
+            const close = document.createElement('button');
+            close.textContent = 'Cancel';
+            close.classList.add('dialog-btn');
+            close.classList.add('dialog-btn-cancel');
+            close.addEventListener('click', ev => {
+                ev.preventDefault();
+                this.hide();
+            });
+
+            footer.append(close);
+            inner.append(header, collection, footer);
             elem.append(inner);
+
+            this.elements = {
+                container: elem,
+                inner: inner,
+                header: header,
+                collection: collection
+            };
+
             return elem;
         }
     }
@@ -612,32 +665,8 @@
                 this.dataPortability.export();
             });
 
-            this.appMenu.add('Theme 1: Default', {}, () => {
-                this.setTheme('default');
-            });
-
-            this.appMenu.add('Theme 2: Light Gray', {}, () => {
-                this.setTheme('lightGray');
-            });
-
-            this.appMenu.add('Theme 3: Dark Pink', {}, () => {
-                this.setTheme('darkPink');
-            });
-
-            this.appMenu.add('Theme 4: Sky Blue', {}, () => {
-                this.setTheme('skyBlue');
-            });
-
-            this.appMenu.add('Theme 5: Grass Green', {}, () => {
-                this.setTheme('grassGreen');
-            });
-
-            this.appMenu.add('Theme 6: Dark', {}, () => {
-                this.setTheme('dark');
-            });
-
-            this.appMenu.add('Theme 7: AMOLED Dark', {}, () => {
-                this.setTheme('amoled');
+            this.appMenu.add('Change theme', {}, () => {
+                this.themeSelector.show();
             });
 
             this.elements.push(this.appMenu);

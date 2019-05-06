@@ -1,6 +1,6 @@
 "use strict";
 
-const CACHE_NAME = 'mobile-start-v13';
+const CACHE_NAME = 'mobile-start-v15';
 const LOG_PREFIX = '[worker]';
 
 console.info(LOG_PREFIX, 'starting');
