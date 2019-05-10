@@ -160,6 +160,7 @@
 
             const image = document.createElement('img');
             image.src = './assets/images/landing.svg';
+            image.alt = `Landing image`;
 
             const text = document.createElement('p');
             text.textContent = `Welcome to Your New Tab`;
