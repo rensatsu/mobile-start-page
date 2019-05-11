@@ -6,5 +6,5 @@ Currently, published only for demonstrational purposes and may be unstable.
 
 # License
 
-(MIT License)[LICENSE.txt]
+[MIT License](LICENSE.txt)
 
