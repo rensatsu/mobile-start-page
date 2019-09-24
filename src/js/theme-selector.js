@@ -1,5 +1,6 @@
-import * as Constants from './constants';
 import Message from './message';
+
+const THEME_DEFAULT = 'default';
 
 export default class ThemeSelector {
     constructor(app, storage) {
@@ -8,32 +9,40 @@ export default class ThemeSelector {
         this.themeName = (app.settings || {}).themeName || null;
 
         this.themesCollection = {
-            default: {
-                name: 'Default'
+            [THEME_DEFAULT]: {
+                name: 'Default',
+                colorBg1: '#1976d2',
+                colorBg2: '#26a69a',
+                colorFg: '#ffffff',
+                colorEntryHover: 'rgba(120, 120, 120, .25)',
             },
             lightGray: {
                 name: 'Light Gray',
                 colorBg1: '#e0e0e0',
                 colorBg2: '#e0e0e0',
-                colorFg: '#263238'
+                colorFg: '#263238',
+                colorEntryHover: 'rgba(120, 120, 120, .25)',
             },
             brightWhite: {
                 name: 'Bright White',
                 colorBg1: '#ffffff',
                 colorBg2: '#ffffff',
-                colorFg: '#263238'
+                colorFg: '#263238',
+                colorEntryHover: 'rgba(120, 120, 120, .25)',
             },
             dark: {
                 name: 'Night Blue',
                 colorBg1: '#070a1b',
                 colorBg2: '#070a1b',
-                colorFg: '#aaaaaa'
+                colorFg: '#aaaaaa',
+                colorEntryHover: 'rgba(255, 255, 255, .25)',
             },
             amoled: {
                 name: 'AMOLED Black',
                 colorBg1: '#000000',
                 colorBg2: '#000000',
-                colorFg: '#999999'
+                colorFg: '#999999',
+                colorEntryHover: 'rgba(255, 255, 255, .15)',
             }
         };
     }
@@ -51,20 +60,42 @@ export default class ThemeSelector {
 
         if (!(name in this.themesCollection)) return;
 
-        const config = this.themesCollection[name];
-
         this.themeName = name;
-        this.app.settings.colorBg1 = config.colorBg1 || null;
-        this.app.settings.colorBg2 = config.colorBg2 || null;
-        this.app.settings.colorFg = config.colorFg || null;
         this.app.settings.themeName = name;
         this.storage.set('settings', JSON.stringify(this.app.settings));
 
         new Message('Theme saved, restarting...');
 
-        setTimeout(() => {
-            location.reload();
-        }, Constants.DEFAULT_DURATION);
+        this.apply(name, true);
+    }
+
+    apply(name, reload = true) {
+        if (!(name in this.themesCollection)) throw new Error(`Theme "${name}" is not found`);
+        const theme = this.themesCollection[name];
+
+        const rootElement = document.documentElement;
+
+        document.querySelector('#wallpaper').hidden = false;
+
+        if ('colorBg1' in theme && theme.colorBg1) {
+            rootElement.style.setProperty('--color-wallpaper-bg1', theme.colorBg1);
+        }
+
+        if ('colorBg2' in theme && theme.colorBg2) {
+            rootElement.style.setProperty('--color-wallpaper-bg2', theme.colorBg2);
+        }
+
+        if ('colorFg' in theme && theme.colorFg) {
+            rootElement.style.setProperty('--color-fg', theme.colorFg);
+        }
+
+        if ('colorEntryHover' in theme && theme.colorEntryHover) {
+            rootElement.style.setProperty('--color-entry-hover', theme.colorEntryHover);
+        }
+
+        if (reload) {
+            this.app.reload();
+        }
     }
 
     render() {

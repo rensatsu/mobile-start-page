@@ -1,4 +1,3 @@
-import * as Constants from './constants';
 import Message from './message';
 
 export default class DataPortability {
@@ -61,9 +60,7 @@ export default class DataPortability {
 
                 new Message('Data import completed. Reloading...');
 
-                setTimeout(() => {
-                    location.reload();
-                }, Constants.DEFAULT_DURATION);
+                this.app.reload();
             });
 
             reader.addEventListener('error', () => {
@@ -84,9 +81,7 @@ export default class DataPortability {
             a.download = fileName;
             a.click();
 
-            setTimeout(() => {
-                URL.revokeObjectURL(url);
-            }, Constants.BLOB_REVOKE_TIMEOUT);
+            this.app.reload();
         };
 
         download(JSON.stringify({

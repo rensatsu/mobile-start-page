@@ -100,18 +100,9 @@ export default class App {
 
     render() {
         this.app.innerHTML = '';
-        const rootElement = document.documentElement;
 
-        if ('colorBg1' in this.settings && this.settings.colorBg1) {
-            rootElement.style.setProperty('--color-wallpaper-bg1', this.settings.colorBg1);
-        }
-
-        if ('colorBg2' in this.settings && this.settings.colorBg2) {
-            rootElement.style.setProperty('--color-wallpaper-bg2', this.settings.colorBg2);
-        }
-
-        if ('colorFg' in this.settings && this.settings.colorFg) {
-            rootElement.style.setProperty('--color-fg', this.settings.colorFg);
+        if ('themeName' in this.settings && this.settings.themeName) {
+            this.themeSelector.apply(this.settings.themeName, false);
         }
 
         if (this.bookmarks.length > 0) {
@@ -128,5 +119,11 @@ export default class App {
         this.elements.forEach(async (elem) => {
             this.app.append(await elem.render());
         });
+    }
+
+    reload() {
+        setTimeout(() => {
+            location.reload();
+        }, Constants.DEFAULT_DURATION);
     }
 }

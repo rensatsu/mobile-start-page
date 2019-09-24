@@ -1,9 +1,10 @@
-$color-pane-bg: #333;
-$color-pane-fg: #fff;
-$color-wallpaper-bg1: #1976d2;
-$color-wallpaper-bg2: #26A69a;
+$color-pane-bg: #333333;
+$color-pane-fg: #ffffff;
+$color-wallpaper-bg1: #26a69a;
+$color-wallpaper-bg2: #26a69a;
 $color-warning: #ffc107;
-$color-fg: #fff;
+$color-fg: #ffffff;
+$color-entry-hover: rgba(#fff, .25);
 
 *, *::before, *::after {
     box-sizing: border-box;
@@ -16,6 +17,7 @@ $color-fg: #fff;
     --color-wallpaper-bg2: #{$color-wallpaper-bg2};
     --color-warning: #{$color-warning};
     --color-fg: #{$color-fg};
+    --color-entry-hover: #{$color-entry-hover};
 }
 
 html, body {
@@ -28,6 +30,7 @@ html, body {
 
 body {
     overscroll-behavior-y: contain;
+    background: var(--color-pane-bg);
 }
 
 @mixin maximize {
@@ -93,7 +96,7 @@ main {
         cursor: pointer;
 
         &:hover, &:focus {
-            background: rgba(#fff, .25);
+            background: var(--color-entry-hover);
         }
 
         .btn {
