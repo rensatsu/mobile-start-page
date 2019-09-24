@@ -1,0 +1,6 @@
+/*
+    strict-transport-security: max-age=31536000;
+    x-content-type-options: nosniff
+    x-xss-protection: 1; mode=block
+    referrer-policy: same-origin
+    x-frame-options: SAMEORIGIN

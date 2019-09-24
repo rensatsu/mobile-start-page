@@ -1,0 +1,9 @@
+export const BTN_EDIT = '🖊️';
+export const BTN_DELETE = '❌';
+export const BTN_ADD = 'Add';
+export const BTN_UP = '🔺';
+export const BTN_DOWN = '🔻';
+export const BTN_MENU = '🍔';
+export const DEFAULT_DURATION = 3000;
+export const BLOB_REVOKE_TIMEOUT = 10000;
+export const EVENT_MESSAGE = 'message-center-alert';
