@@ -13,7 +13,7 @@ export default class ThemeSelector {
                 colorBg1: '#3f51b5',
                 colorBg2: '#00838f',
                 colorFg: '#eceff1',
-                colorEntryHover: 'rgba(120, 120, 120, .25)',
+                colorEntryHover: 'rgba(255, 255, 255, .2)',
             },
             lightGray: {
                 name: 'Light Gray',
