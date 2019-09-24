@@ -17,6 +17,12 @@ export default class ThemeSelector {
                 colorBg2: '#e0e0e0',
                 colorFg: '#263238'
             },
+            brightWhite: {
+                name: 'Bright White',
+                colorBg1: '#ffffff',
+                colorBg2: '#ffffff',
+                colorFg: '#263238'
+            },
             dark: {
                 name: 'Night Blue',
                 colorBg1: '#070a1b',
