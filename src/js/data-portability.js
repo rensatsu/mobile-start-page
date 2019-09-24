@@ -22,14 +22,14 @@ export default class DataPortability {
             e.preventDefault();
 
             if (input.files.length === 0) {
-                new Message("No file selected");
+                new Message('No file selected');
                 return;
             }
 
             const file = input.files[0];
 
             if (!file.name.endsWith('.json')) {
-                new Message("Incorrect file type");
+                new Message('Incorrect file type');
                 return;
             }
 
@@ -42,32 +42,32 @@ export default class DataPortability {
                 try {
                     json = JSON.parse(imported);
                 } catch (e) {
-                    new Message("Unable to verify file");
+                    new Message('Unable to verify file');
                     return;
                 }
 
                 if (!('bookmarks' in json)) {
-                    new Message("File has no 'bookmarks' key");
+                    new Message('File has no "bookmarks" key');
                     return;
                 }
 
                 if (!('settings' in json)) {
-                    new Message("File has no 'settings' key");
+                    new Message('File has no "settings" key');
                     return;
                 }
 
                 this.storage.set('bookmarks', JSON.stringify(json.bookmarks));
                 this.storage.set('settings', JSON.stringify(json.settings));
 
-                new Message("Data import completed. Reloading...");
+                new Message('Data import completed. Reloading...');
 
-                setTimeout(_ => {
+                setTimeout(() => {
                     location.reload();
                 }, Constants.DEFAULT_DURATION);
             });
 
             reader.addEventListener('error', () => {
-                new Message("Unable to load file");
+                new Message('Unable to load file');
                 return;
             });
 
@@ -77,17 +77,17 @@ export default class DataPortability {
 
     export() {
         const download = (content, fileName, contentType) => {
-            const a = document.createElement("a");
+            const a = document.createElement('a');
             const file = new Blob([content], { type: contentType });
             const url = URL.createObjectURL(file);
             a.href = url;
             a.download = fileName;
             a.click();
 
-            setTimeout(_ => {
+            setTimeout(() => {
                 URL.revokeObjectURL(url);
             }, Constants.BLOB_REVOKE_TIMEOUT);
-        }
+        };
 
         download(JSON.stringify({
             bookmarks: this.app.bookmarks,

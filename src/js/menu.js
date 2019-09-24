@@ -29,7 +29,7 @@ export default class Menu {
             },
 
             duration: 150,
-        }
+        };
     }
 
     add(title, params = {}, handler = () => { }) {

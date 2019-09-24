@@ -12,7 +12,7 @@ import DataPortability from './data-portability';
 export default class App {
     constructor(selector) {
         this.app = document.querySelector(selector);
-        if (!this.app) throw new Error(`App container selector didn't match any element`);
+        if (!this.app) throw new Error('App container selector didn\'t match any element');
         this.storage = new Storage('mstart');
 
         this.init();
@@ -64,12 +64,12 @@ export default class App {
         this.themeSelector = new ThemeSelector(this, this.storage);
 
         this.appMenu.add(Constants.BTN_ADD, {}, async () => {
-            const title = await (new Prompt(`Enter title:`, '')).run();
+            const title = await (new Prompt('Enter title:', '')).run();
             if (title === null) {
                 return;
             }
 
-            const url = await (new Prompt(`Enter URL:`, 'https://')).run();
+            const url = await (new Prompt('Enter URL:', 'https://')).run();
             if (url === null) {
                 return;
             }

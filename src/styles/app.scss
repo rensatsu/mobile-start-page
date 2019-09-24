@@ -1,7 +1,8 @@
 $color-pane-bg: #333;
 $color-pane-fg: #fff;
-$color-wallpaper-bg1: #1976D2;
-$color-wallpaper-bg2: #26A69A;
+$color-wallpaper-bg1: #1976d2;
+$color-wallpaper-bg2: #26A69a;
+$color-warning: #ffc107;
 $color-fg: #fff;
 
 *, *::before, *::after {
@@ -13,6 +14,7 @@ $color-fg: #fff;
     --color-pane-fg: #{$color-pane-fg};
     --color-wallpaper-bg1: #{$color-wallpaper-bg1};
     --color-wallpaper-bg2: #{$color-wallpaper-bg2};
+    --color-warning: #{$color-warning};
     --color-fg: #{$color-fg};
 }
 
@@ -297,7 +299,22 @@ main {
 }
 
 #no-js {
-    opacity: 0;
-    animation: .2s no-js-fade-in forwards;
-    animation-delay: 3s;
+    &[hidden] {
+        display: none;
+    }
+
+    &:not([hidden]) {
+        opacity: 0;
+        animation: .2s no-js-fade-in forwards;
+        animation-delay: 3s;
+
+        display: flex;
+        justify-content: center;
+        width: 95%;
+        max-width: 500px;
+        margin: 40px auto;
+        background: var(--color-warning);
+        padding: 20px;
+        border-radius: 3px;
+    }
 }

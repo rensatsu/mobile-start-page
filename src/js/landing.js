@@ -8,13 +8,13 @@ export default class Landing {
         elem.classList.add('landing');
 
         const image = document.createElement('img');
-        const landImageModule = await import(/* webpackMode: "eager" */ `./../images/landing.svg`);
+        const landImageModule = await import(/* webpackMode: "eager" */ './../images/landing.svg');
 
         image.src = landImageModule.default;
-        image.alt = `Landing image`;
+        image.alt = 'Landing image';
 
         const text = document.createElement('p');
-        text.textContent = `Welcome to Your New Tab`;
+        text.textContent = 'Welcome to Your New Tab';
 
         elem.append(image, text);
 

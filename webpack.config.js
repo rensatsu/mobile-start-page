@@ -1,3 +1,5 @@
+/* global __dirname */
+
 const path = require('path');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const WorkboxPlugin = require('workbox-webpack-plugin');
@@ -6,7 +8,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CopyPlugin = require('copy-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
-module.exports = env => {
+module.exports = (env) => {
     const IS_PROD = 'production' in env && env.production;
 
     const DEV_SERVER_PORT = 29998;
@@ -24,7 +26,8 @@ module.exports = env => {
         entry: './src/index.js',
         mode: IS_PROD ? 'production' : 'development',
         output: {
-            filename: 'app.js',
+            filename: IS_PROD ? 'app.[hash].js' : 'app.js',
+            chunkFilename: IS_PROD ? 'app.[id].[hash].js' : 'app.[id].js',
             path: TARGET_PATH
         },
         optimization: {
@@ -78,12 +81,12 @@ module.exports = env => {
                 importWorkboxFrom: 'local',
                 runtimeCaching: [
                     {
-                        urlPattern: new RegExp('^https://www\.google\.com/s2/favicons'),
+                        urlPattern: new RegExp('^https://www.google.com/s2/favicons'),
                         // Apply a network-first strategy.
                         handler: 'NetworkFirst',
                     },
                     {
-                        urlPattern: new RegExp('^https://icons\.duckduckgo\.com/ip3/'),
+                        urlPattern: new RegExp('^https://icons.duckduckgo.com/ip3/'),
                         // Apply a network-first strategy.
                         handler: 'NetworkFirst',
                     }

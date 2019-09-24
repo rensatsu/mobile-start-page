@@ -1,4 +1,5 @@
 import * as Constants from './constants';
+import Prompt from './prompt';
 import Confirm from './confirm';
 import getDefaultIcon from './default-icon';
 
@@ -59,8 +60,8 @@ export default class Entry {
             e.preventDefault();
 
             (async () => {
-                const title = await (new Prompt(`Enter title:`, this.title)).run();
-                const url = await (new Prompt(`Enter URL:`, this.url)).run();
+                const title = await (new Prompt('Enter title:', this.title)).run();
+                const url = await (new Prompt('Enter URL:', this.url)).run();
 
                 if (!title && !url) return;
 
@@ -97,7 +98,7 @@ export default class Entry {
             }
         });
 
-        document.addEventListener('click', e => {
+        document.addEventListener('click', () => {
             elem.classList.remove('is-editable');
         });
 

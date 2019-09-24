@@ -22,7 +22,7 @@ export default class MessageCenter {
         });
 
         if (duration > 0) {
-            setTimeout(_ => {
+            setTimeout(() => {
                 this.remove(alert);
             }, duration);
         }

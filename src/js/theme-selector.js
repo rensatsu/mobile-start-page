@@ -13,39 +13,21 @@ export default class ThemeSelector {
             },
             lightGray: {
                 name: 'Light Gray',
-                colorBg1: '#ccc',
-                colorBg2: '#ccc',
-                colorFg: '#345'
-            },
-            darkPink: {
-                name: 'Dark Pink',
-                colorBg1: '#263238',
-                colorBg2: '#CE93D8',
-                colorFg: '#fff'
-            },
-            skyBlue: {
-                name: 'Sky Blue',
-                colorBg1: '#BBDEFB',
-                colorBg2: '#90CAF9',
-                colorFg: '#37474F'
-            },
-            grassGreen: {
-                name: 'Grass Green',
-                colorBg1: '#8BC34A',
-                colorBg2: '#F9FBE7',
-                colorFg: '#004D40'
+                colorBg1: '#e0e0e0',
+                colorBg2: '#e0e0e0',
+                colorFg: '#263238'
             },
             dark: {
                 name: 'Night Blue',
                 colorBg1: '#070a1b',
                 colorBg2: '#070a1b',
-                colorFg: '#aaa'
+                colorFg: '#aaaaaa'
             },
             amoled: {
                 name: 'AMOLED Black',
-                colorBg1: '#000',
-                colorBg2: '#000',
-                colorFg: '#999'
+                colorBg1: '#000000',
+                colorBg2: '#000000',
+                colorFg: '#999999'
             }
         };
     }
@@ -72,7 +54,7 @@ export default class ThemeSelector {
         this.app.settings.themeName = name;
         this.storage.set('settings', JSON.stringify(this.app.settings));
 
-        new Message("Theme saved, restarting...");
+        new Message('Theme saved, restarting...');
 
         setTimeout(() => {
             location.reload();
@@ -95,7 +77,7 @@ export default class ThemeSelector {
         });
 
         const header = document.createElement('h2');
-        header.textContent = "Theme";
+        header.textContent = 'Theme';
 
         const collection = document.createElement('ul');
         collection.classList.add('theme-collection');
