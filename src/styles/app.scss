@@ -6,6 +6,8 @@ $color-warning: #ffc107;
 $color-fg: #ffffff;
 $color-entry-hover: rgba(#fff, .25);
 
+$entry-size: 32px;
+
 *, *::before, *::after {
     box-sizing: border-box;
 }
@@ -86,8 +88,6 @@ main {
     }
 
     .entry {
-        $entry-size: 32px;
-
         display: grid;
         grid-template-columns: $entry-size 1fr;
         grid-template-rows: auto;
@@ -127,13 +127,13 @@ main {
             line-height: $entry-size;
             padding: 0 0 0 1rem;
         }
+    }
 
-        &.is-editable {
-            grid-template-columns: $entry-size 1fr $entry-size $entry-size $entry-size $entry-size;
+    &.app-editing .entry {
+        grid-template-columns: $entry-size 1fr $entry-size $entry-size $entry-size $entry-size;
 
-            .btn-action {
-                display: block;
-            }
+        .btn-action {
+            display: block;
         }
     }
 

@@ -14,6 +14,8 @@ export default class App {
         this.app = document.querySelector(selector);
         if (!this.app) throw new Error('App container selector didn\'t match any element');
         this.storage = new Storage('mstart');
+        this.entries = [];
+        this.isEditEnabled = false;
 
         this.init();
     }
@@ -89,6 +91,16 @@ export default class App {
             this.themeSelector.show();
         });
 
+        this.appMenu.add('Toggle editing', {}, () => {
+            this.isEditEnabled = !this.isEditEnabled;
+
+            if (this.isEditEnabled) {
+                this.app.classList.add('app-editing');
+            } else {
+                this.app.classList.remove('app-editing');
+            }
+        });
+
         this.elements.push(this.appMenu);
 
         this.render();
@@ -109,7 +121,9 @@ export default class App {
 
         if (this.bookmarks.length > 0) {
             this.bookmarks.forEach((elem, idx) => {
-                this.elements.push(new Entry(elem.title, elem.url, idx, this));
+                const entry = new Entry(elem.title, elem.url, idx, this);
+                this.elements.push(entry);
+                this.entries.push(entry);
             });
         } else {
             this.elements.push(new Landing(this));

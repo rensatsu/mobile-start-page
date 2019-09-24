@@ -98,15 +98,6 @@ export default class Entry {
             }
         });
 
-        document.addEventListener('click', () => {
-            elem.classList.remove('is-editable');
-        });
-
-        elem.addEventListener('contextmenu', e => {
-            e.preventDefault();
-            elem.classList.toggle('is-editable');
-        }, { useCapture: true });
-
         elem.append(icon, title, btnUp, btnDown, btnEdit, btnDelete);
 
         return elem;
