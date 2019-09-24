@@ -63,34 +63,34 @@ export default class ThemeSelector {
         this.app.settings.themeName = name;
         this.storage.set('settings', JSON.stringify(this.app.settings));
 
-        new Message('Theme saved, restarting...');
+        new Message('Theme saved');
 
-        this.apply(name, true);
+        this.apply(name, false);
     }
 
     apply(name, reload = true) {
-        if (!(name in this.themesCollection)) throw new Error(`Theme "${name}" is not found`);
+        if (!(name in this.themesCollection)) {
+            throw new Error(`Theme "${name}" is not found`);
+        }
+
         const theme = this.themesCollection[name];
 
-        const rootElement = document.documentElement;
+        const reqKeys = ['colorBg1', 'colorBg2', 'colorFg', 'colorEntryHover'];
+
+        for (const rk of reqKeys) {
+            if (!(rk in theme) || !theme[rk]) {
+                throw new Error(`Theme "${name}" has no "${rk}" attribute`);
+            }
+        }
+
+        const rootStyle = document.documentElement.style;
 
         document.querySelector('#wallpaper').hidden = false;
 
-        if ('colorBg1' in theme && theme.colorBg1) {
-            rootElement.style.setProperty('--color-wallpaper-bg1', theme.colorBg1);
-        }
-
-        if ('colorBg2' in theme && theme.colorBg2) {
-            rootElement.style.setProperty('--color-wallpaper-bg2', theme.colorBg2);
-        }
-
-        if ('colorFg' in theme && theme.colorFg) {
-            rootElement.style.setProperty('--color-fg', theme.colorFg);
-        }
-
-        if ('colorEntryHover' in theme && theme.colorEntryHover) {
-            rootElement.style.setProperty('--color-entry-hover', theme.colorEntryHover);
-        }
+        rootStyle.setProperty('--color-wallpaper-bg1', theme.colorBg1);
+        rootStyle.setProperty('--color-wallpaper-bg2', theme.colorBg2);
+        rootStyle.setProperty('--color-fg', theme.colorFg);
+        rootStyle.setProperty('--color-entry-hover', theme.colorEntryHover);
 
         if (reload) {
             this.app.reload();
