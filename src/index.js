@@ -5,6 +5,10 @@ import App from './js/app';
 import Message from './js/message';
 
 document.addEventListener('DOMContentLoaded', () => {
+    if (document.getElementById('no-js')) {
+        document.getElementById('no-js').hidden = true;
+    }
+
     new App('main');
 
     if ('serviceWorker' in navigator) {
