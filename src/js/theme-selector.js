@@ -1,6 +1,5 @@
+import { THEME_DEFAULT } from './constants';
 import Message from './message';
-
-const THEME_DEFAULT = 'default';
 
 export default class ThemeSelector {
     constructor(app, storage) {
@@ -11,9 +10,9 @@ export default class ThemeSelector {
         this.themesCollection = {
             [THEME_DEFAULT]: {
                 name: 'Default',
-                colorBg1: '#1976d2',
-                colorBg2: '#26a69a',
-                colorFg: '#ffffff',
+                colorBg1: '#3f51b5',
+                colorBg2: '#00838f',
+                colorFg: '#eceff1',
                 colorEntryHover: 'rgba(120, 120, 120, .25)',
             },
             lightGray: {

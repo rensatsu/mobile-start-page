@@ -103,6 +103,8 @@ export default class App {
 
         if ('themeName' in this.settings && this.settings.themeName) {
             this.themeSelector.apply(this.settings.themeName, false);
+        } else {
+            this.themeSelector.apply(Constants.THEME_DEFAULT, false);
         }
 
         if (this.bookmarks.length > 0) {
