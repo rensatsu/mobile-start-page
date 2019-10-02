@@ -10,7 +10,8 @@ export default class Entry {
         this.index = index;
         this.app = app;
         // this.icon = 'https://www.google.com/s2/favicons?domain=' + (new URL(url).host);
-        this.icon = 'https://icons.duckduckgo.com/ip3/' + (new URL(url).host) + '.ico';
+        // this.icon = 'https://icons.duckduckgo.com/ip3/' + (new URL(url).host) + '.ico';
+        this.icon = 'https://favicon-api.rencloud.workers.dev/?url=' + (new URL(url).host);
     }
 
     render() {

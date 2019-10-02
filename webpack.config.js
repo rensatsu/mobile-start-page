@@ -89,6 +89,11 @@ module.exports = (env) => {
                         urlPattern: new RegExp('^https://icons.duckduckgo.com/ip3/'),
                         // Apply a network-first strategy.
                         handler: 'NetworkFirst',
+                    },
+                    {
+                        urlPattern: new RegExp('^https://favicon-api.rencloud.workers.dev'),
+                        // Apply a network-first strategy.
+                        handler: 'NetworkFirst',
                     }
                 ],
             }),

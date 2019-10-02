@@ -63,9 +63,9 @@ export default class ThemeSelector {
         this.app.settings.themeName = name;
         this.storage.set('settings', JSON.stringify(this.app.settings));
 
-        new Message('Theme saved');
+        new Message('Applying theme');
 
-        this.apply(name, false);
+        this.apply(name, true);
     }
 
     apply(name, reload = true) {
@@ -128,7 +128,9 @@ export default class ThemeSelector {
                 this.hide();
             });
 
-            if (name === this.themeName) {
+            if (this.themeName === null && name === THEME_DEFAULT) {
+                li.classList.add('active');
+            } else if (name === this.themeName) {
                 li.classList.add('active');
             }
 
