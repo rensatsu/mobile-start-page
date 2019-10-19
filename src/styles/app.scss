@@ -7,6 +7,7 @@ $color-fg: #ffffff;
 $color-entry-hover: rgba(#fff, .25);
 
 $entry-size: 32px;
+$entry-padding: 1rem;
 
 *, *::before, *::after {
     box-sizing: border-box;
@@ -89,9 +90,8 @@ main {
 
     .entry {
         display: grid;
-        grid-template-columns: $entry-size 1fr;
+        grid-template-columns: 1fr;
         grid-template-rows: auto;
-        padding: 1rem;
         color: var(--color-fg);
         cursor: pointer;
 
@@ -118,24 +118,39 @@ main {
             display: none;
         }
 
-        img {
-            width: $entry-size;
-            height: $entry-size;
-            display: block;
-        }
-
         a {
-            display: block;
+            display: flex;
             text-decoration: none;
             color: inherit;
-            height: $entry-size;
-            line-height: $entry-size;
-            padding: 0 0 0 1rem;
+            padding: $entry-padding;
+            align-items: center;
+
+            img {
+                width: $entry-size;
+                height: $entry-size;
+                display: block;
+            }
+
+            .title-block {
+                display: flex;
+                flex-direction: column;
+                padding: 0 0 0 $entry-padding;
+
+                .title-block-title {
+                    font-size: 1rem;
+                    line-height: 1.25rem;
+                }
+
+                .title-block-url {
+                    font-size: .8rem;
+                    opacity: .5;
+                }
+            }
         }
     }
 
     &.app-editing .entry {
-        grid-template-columns: $entry-size 1fr $entry-size $entry-size $entry-size $entry-size;
+        grid-template-columns: 1fr $entry-size $entry-size $entry-size $entry-size;
 
         .btn-action {
             display: block;
@@ -158,6 +173,7 @@ main {
         @include maximize();
         background: rgba(#000, .25);
         user-select: none;
+        z-index: 1;
 
         > ul {
             @include maximize-bottom();

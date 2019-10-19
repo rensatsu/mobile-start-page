@@ -26,10 +26,23 @@ export default class Entry {
             icon.src = getDefaultIcon();
         }, { once: true });
 
-        const title = document.createElement('a');
-        title.href = this.url;
+        const titleWrapper = document.createElement('a');
+        titleWrapper.href = this.url;
+        titleWrapper.rel = 'noopener noreferrer';
+
+        const titleBlock = document.createElement('div');
+        titleBlock.classList.add('title-block');
+
+        const title = document.createElement('div');
+        title.classList.add('title-block-title');
         title.textContent = this.title;
-        title.rel = 'noopener noreferrer';
+
+        const url = document.createElement('div');
+        url.classList.add('title-block-url');
+        url.textContent = this.url;
+
+        titleBlock.append(title, url);
+        titleWrapper.append(icon, titleBlock);
 
         const btnUp = document.createElement('button');
         btnUp.classList.add('btn');
@@ -98,6 +111,7 @@ export default class Entry {
             })();
         });
 
+        /*
         elem.addEventListener('click', e => {
             e.preventDefault();
 
@@ -109,8 +123,9 @@ export default class Entry {
                 location.href = this.url;
             }
         });
+        */
 
-        elem.append(icon, title, btnUp, btnDown, btnEdit, btnDelete);
+        elem.append(titleWrapper, btnUp, btnDown, btnEdit, btnDelete);
 
         return elem;
     }
