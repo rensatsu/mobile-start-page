@@ -42,7 +42,14 @@ export default class ThemeSelector {
                 colorBg2: '#000000',
                 colorFg: '#999999',
                 colorEntryHover: 'rgba(255, 255, 255, .15)',
-            }
+            },
+            lightBlue: {
+                name: 'Light Blue',
+                colorBg1: '#90caf9',
+                colorBg2: '#e3f2fd',
+                colorFg: '#424242',
+                colorEntryHover: 'rgba(255, 255, 255, 0.25)',
+            },
         };
     }
 
