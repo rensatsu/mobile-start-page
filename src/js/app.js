@@ -9,6 +9,11 @@ import Entry from './entry';
 import MessageCenter from './message-center';
 import DataPortability from './data-portability';
 
+import '@fortawesome/fontawesome-free/js/fontawesome';
+import '@fortawesome/fontawesome-free/js/solid';
+// import '@fortawesome/fontawesome-free/js/regular';
+// import '@fortawesome/fontawesome-free/js/brands';
+
 export default class App {
     constructor(selector) {
         this.app = document.querySelector(selector);

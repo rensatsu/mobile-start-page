@@ -1,7 +1,7 @@
-import * as Constants from './constants';
 import Prompt from './prompt';
 import Confirm from './confirm';
 import getDefaultIcon from './default-icon';
+import faIcon from './fa-icon';
 
 export default class Entry {
     constructor(title, url, index, app) {
@@ -9,8 +9,6 @@ export default class Entry {
         this.url = url;
         this.index = index;
         this.app = app;
-        // this.icon = 'https://www.google.com/s2/favicons?domain=' + (new URL(url).host);
-        // this.icon = 'https://icons.duckduckgo.com/ip3/' + (new URL(url).host) + '.ico';
         this.icon = 'https://favicon-api.rencloud.workers.dev/?url=' + (new URL(url).host);
     }
 
@@ -36,7 +34,10 @@ export default class Entry {
         const btnUp = document.createElement('button');
         btnUp.classList.add('btn');
         btnUp.classList.add('btn-action');
-        btnUp.textContent = Constants.BTN_UP;
+
+        const btnUpIcon = faIcon('fas fa-arrow-up');
+        btnUp.append(btnUpIcon);
+
         if (this.index === 0) btnUp.setAttribute('disabled', 'disabled');
         btnUp.addEventListener('click', e => {
             e.preventDefault();
@@ -46,7 +47,10 @@ export default class Entry {
         const btnDown = document.createElement('button');
         btnDown.classList.add('btn');
         btnDown.classList.add('btn-action');
-        btnDown.textContent = Constants.BTN_DOWN;
+
+        const btnDownIcon = faIcon('fas fa-arrow-down');
+        btnDown.append(btnDownIcon);
+
         if (this.index === this.app.bookmarks.length - 1) btnDown.setAttribute('disabled', 'disabled');
         btnDown.addEventListener('click', e => {
             e.preventDefault();
@@ -56,7 +60,10 @@ export default class Entry {
         const btnEdit = document.createElement('button');
         btnEdit.classList.add('btn');
         btnEdit.classList.add('btn-action');
-        btnEdit.textContent = Constants.BTN_EDIT;
+
+        const btnEditIcon = faIcon('fas fa-pen');
+        btnEdit.append(btnEditIcon);
+
         btnEdit.addEventListener('click', e => {
             e.preventDefault();
 
@@ -73,7 +80,11 @@ export default class Entry {
         const btnDelete = document.createElement('button');
         btnDelete.classList.add('btn');
         btnDelete.classList.add('btn-action');
-        btnDelete.textContent = Constants.BTN_DELETE;
+        btnDelete.classList.add('btn-warning');
+
+        const btnDeleteIcon = faIcon('fas fa-times');
+        btnDelete.append(btnDeleteIcon);
+
         btnDelete.addEventListener('click', e => {
             e.preventDefault();
 

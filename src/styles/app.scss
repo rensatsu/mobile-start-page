@@ -102,10 +102,15 @@ main {
         .btn {
             background: none;
             border: 0;
+            color: inherit;
 
             &[disabled] {
                 filter: grayscale(1);
                 opacity: .25;
+            }
+
+            &.btn-warning {
+                color: $color-warning;
             }
         }
 

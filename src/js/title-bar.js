@@ -1,5 +1,3 @@
-import * as Constants from './constants';
-
 export default class TitleBar {
     constructor(title, app, menu) {
         this.title = title;
@@ -15,7 +13,13 @@ export default class TitleBar {
         const btnMenu = document.createElement('button');
         btnMenu.classList.add('btn');
         btnMenu.classList.add('btn-menu');
-        btnMenu.textContent = Constants.BTN_MENU;
+
+        const btnMenuIcon = document.createElement('i');
+        btnMenuIcon.classList.add('fas');
+        btnMenuIcon.classList.add('fa-bars');
+
+        btnMenu.append(btnMenuIcon);
+
         btnMenu.addEventListener('click', e => {
             e.preventDefault();
             this.menu.toggle();
