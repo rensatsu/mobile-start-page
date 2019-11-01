@@ -92,8 +92,6 @@ export default class ThemeSelector {
 
         const rootStyle = document.documentElement.style;
 
-        document.querySelector('#wallpaper').hidden = false;
-
         rootStyle.setProperty('--color-wallpaper-bg1', theme.colorBg1);
         rootStyle.setProperty('--color-wallpaper-bg2', theme.colorBg2);
         rootStyle.setProperty('--color-fg', theme.colorFg);
