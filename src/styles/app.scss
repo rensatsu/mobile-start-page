@@ -31,9 +31,18 @@ html, body {
     font-size: 16px;
 }
 
+html {
+    height: 100%;
+}
+
 body {
     overscroll-behavior-y: contain;
-    background: var(--color-pane-bg);
+    background: var(--color-pane-bg)
+        linear-gradient(
+            to bottom,
+            var(--color-wallpaper-bg1),
+            var(--color-wallpaper-bg2)
+        );
 }
 
 @mixin maximize {
@@ -49,12 +58,6 @@ body {
     bottom: 0;
     left: 0;
     width: 100%;
-}
-
-#wallpaper {
-    @include maximize();
-    z-index: -1;
-    background: linear-gradient(to bottom, var(--color-wallpaper-bg1), var(--color-wallpaper-bg2));
 }
 
 main {
