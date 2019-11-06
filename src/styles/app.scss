@@ -32,11 +32,12 @@ html, body {
 }
 
 html {
-    height: 100%;
+    height: 100vh;
 }
 
 body {
     overscroll-behavior-y: contain;
+    min-height: 100vh;
     background: var(--color-pane-bg)
         linear-gradient(
             to bottom,
