@@ -78,7 +78,7 @@ module.exports = (env) => {
             new WorkboxPlugin.GenerateSW({
                 clientsClaim: true,
                 skipWaiting: true,
-                importWorkboxFrom: 'local',
+                maximumFileSizeToCacheInBytes: 5000000,
                 runtimeCaching: [
                     {
                         urlPattern: new RegExp('^https://www.google.com/s2/favicons'),
