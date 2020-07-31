@@ -1,6 +1,6 @@
 'use strict';
 
-import './styles/app.scss';
+import './styles/app.less';
 import App from './js/app';
 import Message from './js/message';
 

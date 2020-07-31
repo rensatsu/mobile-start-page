@@ -4,7 +4,6 @@ import Storage from './storage';
 import Menu from './menu';
 import TitleBar from './title-bar';
 import Landing from './landing';
-import ThemeSelector from './theme-selector';
 import Entry from './entry';
 import MessageCenter from './message-center';
 import DataPortability from './data-portability';
@@ -68,9 +67,9 @@ export default class App {
         this.appMenu = new Menu(this);
         this.elements.push(new TitleBar('New tab', this, this.appMenu));
 
-        this.themeSelector = new ThemeSelector(this, this.storage);
-
-        this.appMenu.add(Constants.BTN_ADD, {}, async () => {
+        this.appMenu.add(Constants.BTN_ADD, {
+            icon: 'fas fa-plus',
+        }, async () => {
             const title = await (new Prompt('Enter title:', '')).run();
             if (title === null) {
                 return;
@@ -84,19 +83,21 @@ export default class App {
             this.add(title, url);
         });
 
-        this.appMenu.add('Import data', {}, () => {
+        this.appMenu.add('Import data', {
+            icon: 'fas fa-file-import',
+        }, () => {
             this.dataPortability.import();
         });
 
-        this.appMenu.add('Export data', {}, () => {
+        this.appMenu.add('Export data', {
+            icon: 'fas fa-file-export',
+        }, () => {
             this.dataPortability.export();
         });
 
-        this.appMenu.add('Change theme', {}, () => {
-            this.themeSelector.show();
-        });
-
-        this.appMenu.add('Toggle editing', {}, () => {
+        this.appMenu.add('Toggle editing', {
+            icon: 'fas fa-edit',
+        }, () => {
             this.isEditEnabled = !this.isEditEnabled;
 
             if (this.isEditEnabled) {
@@ -111,18 +112,8 @@ export default class App {
         this.render();
     }
 
-    setTheme(name) {
-        this.themeSelector.set(name);
-    }
-
     render() {
         this.app.innerHTML = '';
-
-        if ('themeName' in this.settings && this.settings.themeName) {
-            this.themeSelector.apply(this.settings.themeName, false);
-        } else {
-            this.themeSelector.apply(Constants.THEME_DEFAULT, false);
-        }
 
         if (this.bookmarks.length > 0) {
             this.bookmarks.forEach((elem, idx) => {
@@ -135,7 +126,6 @@ export default class App {
         }
 
         this.elements.push(new MessageCenter());
-        this.elements.push(this.themeSelector);
 
         this.elements.forEach(async (elem) => {
             this.app.append(await elem.render());

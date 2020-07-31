@@ -1,0 +1,289 @@
+/* default colors */
+@color-pane-bg: #333333;
+@color-pane-fg: #ffffff;
+@color-pane-border: mix(#000, @color-pane-fg, 50%);
+
+@color-bg: #fafafa;
+@color-fg: #263238;
+@color-warning: #f57c00;
+@color-entry-hover: rgba(@color-fg, .2);
+/* end: default colors */
+
+/* dark mode colors */
+@dark-color-pane-bg: @color-pane-bg;
+@dark-color-pane-fg: @color-pane-fg;
+@dark-color-pane-border: @color-pane-border;
+
+@dark-color-bg: #424242;
+@dark-color-fg: #fafafa;
+@dark-color-warning: @color-warning;
+@dark-color-entry-hover: rgba(#fff, .2);
+/* end: dark mode colors */
+
+/* sizing */
+@entry-size: 32px;
+@entry-padding: 1rem;
+/* end: sizing */
+
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+
+:root {
+    --color-pane-bg: @color-pane-bg;
+    --color-pane-fg: @color-pane-fg;
+    --color-pane-border: @color-pane-border;
+
+    --color-bg: @color-bg;
+    --color-warning: @color-warning;
+    --color-fg: @color-fg;
+    --color-entry-hover: @color-entry-hover;
+
+    @media (prefers-color-scheme: dark) {
+        --color-pane-bg: @dark-color-pane-bg;
+        --color-pane-fg: @dark-color-pane-fg;
+        --color-pane-border: @dark-color-pane-border;
+
+        --color-bg: @dark-color-bg;
+        --color-warning: @dark-color-warning;
+        --color-fg: @dark-color-fg;
+        --color-entry-hover: @dark-color-entry-hover;
+    }
+}
+
+html, body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont,
+        "Segoe UI", Roboto, Helvetica, Arial, sans-serif,
+        "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+    font-size: 16px;
+}
+
+html {
+    min-height: 100vh;
+}
+
+body {
+    overscroll-behavior-y: contain;
+    min-height: 100vh;
+    background-color: var(--color-bg);
+}
+
+.util-maximize {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.util-maximize-bottom {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+}
+
+main {
+    nav {
+        background: var(--color-pane-bg);
+        color: var(--color-pane-fg);
+        padding: 1rem;
+        display: flex;
+        user-select: none;
+
+        h1 {
+            font-size: 1.1rem;
+            padding: 0;
+            margin: 0;
+            flex: 1;
+        }
+
+        .btn {
+            color: inherit;
+            border: 1px solid #ccc;
+            background: none;
+            padding: 3px 5px;
+            margin: 0;
+            border-radius: 3px;
+            cursor: pointer;
+
+            &:hover, &:focus, &:active {
+                background-color: rgba(#fff, .25);
+                outline: 0;
+            }
+        }
+    }
+
+    .entry {
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-template-rows: auto;
+        color: var(--color-fg);
+        cursor: pointer;
+
+        &:hover, &:focus {
+            background: var(--color-entry-hover);
+        }
+
+        .btn {
+            background: none;
+            border: 0;
+            color: inherit;
+            cursor: pointer;
+
+            &[disabled] {
+                filter: grayscale(1);
+                opacity: .25;
+                cursor: not-allowed;
+            }
+
+            &.btn-warning {
+                color: var(--color-warning);
+            }
+        }
+
+        .btn-action {
+            display: none;
+        }
+
+        a {
+            display: grid;
+            grid-template: auto / @entry-size auto;
+            text-decoration: none;
+            color: inherit;
+            padding: @entry-padding;
+            align-items: center;
+            overflow: hidden;
+
+            img {
+                width: @entry-size;
+                height: @entry-size;
+                display: block;
+            }
+
+            .title-block {
+                display: flex;
+                flex-direction: column;
+                padding: 0 0 0 @entry-padding;
+                overflow: hidden;
+                white-space: nowrap;
+
+                .title-block-title {
+                    font-size: 1rem;
+                    line-height: 1.25rem;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                }
+
+                .title-block-url {
+                    font-size: .8rem;
+                    opacity: .5;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                }
+            }
+        }
+    }
+
+    &.app-editing .entry {
+        grid-template-columns: 1fr repeat(4, @entry-size);
+
+        .btn-action {
+            display: block;
+        }
+    }
+
+    .message-center {
+        .util-maximize-bottom();
+
+        & > div {
+            padding: 1rem;
+            background: var(--color-pane-bg);
+            color: var(--color-pane-fg);
+            cursor: pointer;
+            border-top: 1px solid var(--color-pane-border);
+        }
+    }
+
+    .menu {
+        .util-maximize();
+        background: rgba(#000, .25);
+        user-select: none;
+        z-index: 1;
+
+        > ul {
+            .util-maximize-bottom();
+
+            background: var(--color-pane-bg);
+            color: var(--color-pane-fg);
+
+            margin: 0;
+            padding: 0;
+            max-height: 70%;
+            overflow: auto;
+
+            > li {
+                &:hover {
+                    background: rgba(#fff, .25);
+                }
+
+                a {
+                    padding: 1rem;
+                    display: block;
+                    cursor: pointer;
+
+                    .icon {
+                        margin-right: 1ch;
+                    }
+                }
+            }
+        }
+    }
+
+    .landing {
+        width: 90%;
+        margin: 1rem auto;
+        text-align: center;
+
+        > img {
+            max-width: 300px;
+        }
+
+        > p {
+            font-size: 1.25rem;
+            color: var(--color-fg);
+        }
+    }
+}
+
+@keyframes no-js-fade-in {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+#no-js {
+    &[hidden] {
+        display: none;
+    }
+
+    &:not([hidden]) {
+        opacity: 0;
+        animation: .2s no-js-fade-in forwards;
+        animation-delay: 3s;
+
+        display: flex;
+        justify-content: center;
+        width: 95%;
+        max-width: 500px;
+        margin: 40px auto;
+        background: var(--color-warning);
+        padding: 20px;
+        border-radius: 3px;
+    }
+}

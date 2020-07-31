@@ -45,7 +45,7 @@ module.exports = (env) => {
         module: {
             rules: [
                 {
-                    test: /\.scss$/,
+                    test: /\.less$/,
                     use: [
                         {
                             loader: MiniCssExtractPlugin.loader,
@@ -54,7 +54,7 @@ module.exports = (env) => {
                             },
                         },
                         'css-loader', // translates CSS into CommonJS
-                        'sass-loader', // compiles Sass to CSS, using Node Sass by default
+                        'less-loader', // compiles Less to CSS
                     ],
                 },
                 {

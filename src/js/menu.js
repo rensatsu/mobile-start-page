@@ -82,15 +82,27 @@ export default class Menu {
         this.items.forEach(el => {
             const item = document.createElement('li');
             const link = document.createElement('a');
-            link.textContent = el.title;
+            const icon = document.createElement('span');
+            const text = document.createElement('span');
+
+            text.classList.add('text');
+
+            icon.classList.add('icon');
+            icon.classList.add('fas', 'fa-fw');
+
+            if ('icon' in el.params) {
+                icon.classList.add(...el.params.icon.split(' '));
+            }
+
+            text.textContent = el.title;
             link.addEventListener('click', e => {
                 e.preventDefault();
                 el.handler(e, el);
                 this.hide();
             });
 
+            link.append(icon, text);
             item.append(link);
-
             inner.append(item);
         });
 
