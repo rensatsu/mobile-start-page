@@ -132,9 +132,11 @@ module.exports = (env) => {
                     }
                 ]
             }),
-            new CopyPlugin([
-                { from: path.resolve('./_headers'), to: TARGET_PATH },
-            ]),
+            new CopyPlugin({
+                patterns: [
+                    { from: path.resolve('./_headers'), to: TARGET_PATH },
+                ]
+            }),
             new MiniCssExtractPlugin({
                 filename: IS_PROD ? '[name].[hash].css' : '[name].css',
                 chunkFilename: IS_PROD ? '[id].[hash].css' : '[id].css',
