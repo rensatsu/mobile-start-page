@@ -1,8 +1,10 @@
 # Mobile Start Page
 
-Customizable new tab page for mobile devices. Add new favorites, change themes and is available offline.
+Universal new tab page for mobile devices.
 
-Currently, published only for demonstrational purposes and may be unstable.
+Easy access to your favorite websites, dark mode support, available offline.
+
+> ⚠ Application published only for demonstrational purposes and may be unstable.
 
 [![Netlify Status][netlify-image]][netlify-link]
 
