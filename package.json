@@ -5,12 +5,13 @@
   "main": "index.js",
   "scripts": {
     "watch": "webpack-dev-server --env.development",
-    "build": "webpack --env.production"
+    "build": "webpack --env.production --mode=production"
   },
   "author": "Rensatsu",
   "license": "MIT",
   "devDependencies": {
-    "@fortawesome/fontawesome-free": "^5.15.1",
+    "@fortawesome/fontawesome-svg-core": "^1.2.32",
+    "@fortawesome/free-solid-svg-icons": "^5.15.1",
     "babel-eslint": "^10.1.0",
     "clean-webpack-plugin": "^3.0.0",
     "copy-webpack-plugin": "^6.3.0",

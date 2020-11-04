@@ -8,10 +8,31 @@ import Entry from './entry';
 import MessageCenter from './message-center';
 import DataPortability from './data-portability';
 
-import '@fortawesome/fontawesome-free/js/fontawesome';
-import '@fortawesome/fontawesome-free/js/solid';
-// import '@fortawesome/fontawesome-free/js/regular';
-// import '@fortawesome/fontawesome-free/js/brands';
+import { library, dom } from '@fortawesome/fontawesome-svg-core';
+import {
+    faArrowUp,
+    faArrowDown,
+    faPen,
+    faTimes,
+    faPlus,
+    faFileImport,
+    faFileExport,
+    faEdit,
+    faBars,
+} from '@fortawesome/free-solid-svg-icons';
+
+library.add(
+    faArrowUp,
+    faArrowDown,
+    faPen,
+    faTimes,
+    faPlus,
+    faFileImport,
+    faFileExport,
+    faEdit,
+    faBars
+);
+dom.watch();
 
 export default class App {
     constructor(selector) {

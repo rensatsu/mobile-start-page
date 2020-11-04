@@ -142,11 +142,7 @@ module.exports = (env) => {
                 chunkFilename: IS_PROD ? '[id].[hash].css' : '[id].css',
                 ignoreOrder: false, // Enable to remove warnings about conflicting order
             }),
-        ],
-        performance: {
-            maxEntrypointSize: 1 * 1024 * 1024,
-            maxAssetSize: 1 * 1024 * 1024,
-        }
+        ]
     };
 
     if (!IS_PROD) {
