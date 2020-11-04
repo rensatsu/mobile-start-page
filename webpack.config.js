@@ -8,8 +8,8 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CopyPlugin = require('copy-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
-module.exports = (env) => {
-    const IS_PROD = 'production' in env && env.production;
+module.exports = (_, params) => {
+    const IS_PROD = 'mode' in params && params.mode === 'production';
 
     const DEV_SERVER_PORT = 29998;
 
@@ -96,7 +96,7 @@ module.exports = (env) => {
                         handler: 'NetworkFirst',
                     }
                 ],
-                globIgnores: [
+                exclude: [
                     '**/_headers',
                 ]
             }),
