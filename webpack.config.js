@@ -96,6 +96,9 @@ module.exports = (env) => {
                         handler: 'NetworkFirst',
                     }
                 ],
+                globIgnores: [
+                    '**/_headers',
+                ]
             }),
             new WebpackPwaManifest({
                 name: APP_NAME,
