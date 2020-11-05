@@ -97,7 +97,7 @@ module.exports = (_, params) => {
                     }
                 ],
                 exclude: [
-                    '**/_headers',
+                    '_headers',
                 ]
             }),
             new WebpackPwaManifest({
