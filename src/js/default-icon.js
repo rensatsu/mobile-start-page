@@ -1,5 +1,5 @@
-import defaultIcon from './../images/default.svg';
+import defaultIcon from "./../images/default.svg";
 
 export default function getDefaultIcon() {
-    return defaultIcon;
+  return defaultIcon;
 }

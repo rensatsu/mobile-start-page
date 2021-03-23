@@ -1,12 +1,12 @@
 export default class Confirm {
-    constructor(text) {
-        this.text = text;
-    }
+  constructor(text) {
+    this.text = text;
+  }
 
-    run() {
-        return new Promise(resolve => {
-            const result = confirm(this.text);
-            resolve(result);
-        });
-    }
+  run() {
+    return new Promise((resolve) => {
+      const result = confirm(this.text);
+      resolve(result);
+    });
+  }
 }
