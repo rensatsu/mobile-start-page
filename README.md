@@ -4,6 +4,8 @@ Universal new tab page for mobile devices.
 
 Easy access to your favorite websites, dark mode support, available offline.
 
+> ⚠ This project is not maintained anymore.
+
 > ⚠ Application published only for demonstrational purposes and may be unstable.
 
 [![Netlify Status][netlify-image]][netlify-link]
