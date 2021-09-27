@@ -107,6 +107,12 @@ export default class App {
           return;
         }
 
+        try {
+          new URL(url);
+        } catch (e) {
+          return;
+        }
+
         this.add(title, url);
       },
     });
