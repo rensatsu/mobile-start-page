@@ -9,9 +9,9 @@ const CopyPlugin = require("copy-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 module.exports = (_, params) => {
-  const IS_PROD = "mode" in params && params.mode === "production";
+  const IS_PROD = params?.mode === "production";
 
-  const DEV_SERVER_PORT = 29998;
+  const DEV_SERVER_PORT = process.env.HTTP_POST ?? 29998;
 
   const APP_NAME = "Start Page";
   const APP_SHORT_NAME = "Start Page";
